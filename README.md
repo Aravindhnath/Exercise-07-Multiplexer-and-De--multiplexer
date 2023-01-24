@@ -47,42 +47,84 @@ If the control input changes to AB = 10, then all the gates are restricted excep
  
  
 ### Procedure
-/* write all the steps invloved */
+Step1:
+Start the module.
 
+Step2:
+Declare the inputs and outputs along with the select lines according to the multiplexer and demultiplexer.
 
+Step3:
+Use wire to assign intermediate outputs.
 
+Step4:
+Use and,or and not gates to get the desired output.
+
+Step5:
+End the module.
+
+Step6:
+Generate RTL realization and timing diagrams.
 ### PROGRAM 
+```
 /*
 Program for flipflops  and verify its truth table in quartus using Verilog programming.
-Developed by: 
-RegisterNumber:  
+Developed by: Aravindhnath T R
+RegisterNumber: 22009024
 */
+```
+### MUX:
+```
+module mux(s1,s2,ip,iq,ir,is,y);
+input s1,s2,ip,iq,ir,is;
+output y;
+wire a,b,c,d,e,f;
+assign e = ~s1;
+assign f = ~s2;
+assign a = ip & e & f;
+assign b =  iq & e & s2;
+assign c = ir & s1 & f;
+assign d = is & s1 & s2;
+assign y = a | b | c | d;
+endmodule
+```
+### DEMUX:
+```
+module demux(Y0,Y1,Y2,Y3,S0,S1,I);
+input S0,S1,I;
+output Y0,Y1,Y2,Y3;
+wire S0C,S1C;
+not(S0C,S0);
+not(S1C,S1);
+and(Y0,I,S0C,S1C);
+and(Y1,I,S0C,S1);
+and(Y2,I,S0,S1C);
+and(Y3,I,S0,S1);
+endmodule
+```
+### RTL LOGIC:
+### MUX:
+![mux exp7](https://user-images.githubusercontent.com/118790841/214293555-2b8a438c-76ef-4e1e-b69e-a396cbdf36e6.png)
+### DEMUX:
+![demux exp7](https://user-images.githubusercontent.com/118790841/214293567-19ad29f5-0f57-4357-82ca-e04c97c38103.png)
 
+### TIMING DIGRAMS:  
+### MUX:
+![td mux1](https://user-images.githubusercontent.com/118790841/214294017-22f787eb-ccbb-42d8-8d25-6e113f97e126.png)
 
+![td mux2](https://user-images.githubusercontent.com/118790841/214294032-a54cc0f1-b1d7-40b8-a2fc-3b3074f90ba9.png)
 
+![td mux 3](https://user-images.githubusercontent.com/118790841/214294038-3f57593d-aad5-47dd-9455-e9d587f0c6aa.png)
 
+![td mux 4](https://user-images.githubusercontent.com/118790841/214294044-7e322e1b-78d9-4c55-8425-b6b4b68e7783.png)
 
+### DEMUX:
+![td demux](https://user-images.githubusercontent.com/118790841/214294235-1ede83cf-5599-4981-a37f-5fd2eb503a92.png)
 
-### RTL LOGIC  
-
-
-
-
-
-
-
-
-### TIMING DIGRAMS  
-
-
-
-
-
-### TRUTH TABLE 
-
-
-
-
-
+### TRUTH TABLE:
+### MUX:
+![tt mux](https://user-images.githubusercontent.com/118790841/214294419-039b75b1-7529-4b98-8715-197c96e8b5d4.png)
+### DEMUX:
+![tt demux](https://user-images.githubusercontent.com/118790841/214294546-916b1389-c300-4301-b70c-a406b9ca01ff.png)
 
 ### RESULTS 
+Hence 4x1 Multiplexer and 1x4 Demultiplexer is been implemented and verified using verilog programming and its output are validated.
